@@ -6,4 +6,5 @@ export const useCurrentUser =()=>
     const isLoading = data === undefined;   
     return {data,isLoading}
 
-}   
+}  
+// go to page.tsx

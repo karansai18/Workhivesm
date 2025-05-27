@@ -42,6 +42,11 @@ export const current = query({
 
     if (!userId) return null;
 
-    return await ctx.db.get(userId);
+    return await ctx.db.get(userId);    
   },
 });
+
+//Asks the auth helper (from @convex-dev/auth) to return the currently logged-in user's ID, if any.
+
+// If the user is not authenticated, userId will be null.
+

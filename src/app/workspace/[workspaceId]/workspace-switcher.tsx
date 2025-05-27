@@ -50,7 +50,7 @@ export const WorkspaceSwitcher=()=>{
                         <div className="shrink-0 size-9 relative over-flow-hidden bg-[#616061] text-white font-semi-bold text-lg rounded-md flex items-center justify-center  mr-2">
                             {workspace.name.charAt(0).toUpperCase()}
                         </div>
-                        <p className="turncate">{workspace.name}</p>
+                        <p className="turncate">{workspace.name}    </p>
                         </DropdownMenuItem>
                     ))}
 
@@ -66,5 +66,5 @@ export const WorkspaceSwitcher=()=>{
         </DropdownMenu>
             
         
-    );
+  );
 }

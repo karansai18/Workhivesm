@@ -69,7 +69,7 @@ export const SignUpCard = ({setState}:SignUpCardProps) => {
            </div>
       )}
      
-      <CardContent className="space-y-5 px-0 pb-0">
+      <CardContent className="spacse-y-5 px-0 pb-0">
             <form onSubmit={onPasswordSignUp} className="space-y-2.5">
                 <Input disabled={false} value={name} onChange={(e)=>setName (e.target.value)} placeholder="FullName" type="text" required
                 />
