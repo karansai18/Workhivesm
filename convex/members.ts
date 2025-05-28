@@ -38,12 +38,12 @@ export const current = query({
       .withIndex("by_workspace_id_user_id", (q) =>
         q.eq("workspaceId", args.workspaceId).eq("userId", userId)
       )
-      .collect();
+      .unique();
 
-    if (member.length === 0) {
+    if (!member) {
       return null;
     }
 
-    return member[0]; // return the current member
+    return member; // return the current member
   }
 });

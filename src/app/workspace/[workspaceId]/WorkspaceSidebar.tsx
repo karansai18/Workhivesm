@@ -2,6 +2,8 @@ import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { useworkspaceId } from "@/hooks/use-workspace-id"
 import { AlertTriangle, Loader } from "lucide-react";
+import { WorkspaceHeader } from "./workspaceHeader";
+
 
 export const WorkspaceSidebar=()=>{
     const workspaceId = useworkspaceId();
@@ -18,7 +20,7 @@ export const WorkspaceSidebar=()=>{
         );
     }
 
-    if(true)
+    if(!workspace || !member)
     {
         return(
             <div className="flex flex-col bg-[#5E2C5F] h-full items-center justify-center">
@@ -27,7 +29,16 @@ export const WorkspaceSidebar=()=>{
                     Workspace not found
                 </p>
                 
-            </div>
+            </div> 
         );
     }
-}   
+
+    return(
+        <div className="flex flex-col bg-[#5E2C5F] h-full">
+                <WorkspaceHeader workspace={workspace} isAdmin={member.role==='admin'}/>
+        </div>
+    )
+};
+
+
+// that heading on top left 

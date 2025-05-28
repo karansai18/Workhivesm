@@ -20,7 +20,7 @@ export const WorkspaceSwitcher=()=>{
     const {data:workspaces,isLoading:workspacesLoading} = useGetWorkspaces();
     const [_open,setOpen] = useCreateWorkspaceModal();
 
-    const filteredWorkspaces = workspaces?.filter((workspace)=>workspace?._id!=workspaceId)
+    const filteredWorkspaces = workspaces?.filter((workspace)=>workspace?._id!=workspaceId);
 
     return(
         <DropdownMenu>
@@ -64,7 +64,5 @@ export const WorkspaceSwitcher=()=>{
             
             </DropdownMenuContent>
         </DropdownMenu>
-            
-        
   );
 }
