@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useworkspaceId } from "@/hooks/use-workspace-id";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useConfirm } from "@/hooks/use-confirm";
 interface PreferencesModalProps{
     open:boolean;
     setOpen:(open:boolean)=>void;
@@ -28,12 +29,25 @@ export const PreferencesModal=({
 }:PreferencesModalProps)=>{
     const workspaceId = useworkspaceId();
     const router = useRouter();
-    const [value,setValue] = useState(initialValue);
+    const [ConfirmDialog,confirm]= useConfirm(
+        "Are you sure?",
+        "This action is irreversible"
+    );
+    // const [ConfirmEditDialog,confirmEdit]= useConfirm(
+    //     "Are you sure?",
+    //     "This action is irreversible"
+    // );
+    const [value,setValue] = useState(initialValue);    
     const [editOpen,setEditOpen]= useState(false);
     const {mutate:updateWorkspace,isPending:isUpdatingWorkspace} = useUpdateWorkspace();
     const {mutate:removeWorkspace,isPending:isRemovingWorkspace} = useRemoveWorkspace();
 
-    const handleRemove=()=>{
+    const handleRemove=async()=>{
+        const ok = await confirm();
+        if(!ok)
+        {
+            return;
+        }
          removeWorkspace({
             id:workspaceId
          },{
@@ -51,8 +65,9 @@ export const PreferencesModal=({
          })
 
     }
-    const handleEdit=(e:React.FormEvent<HTMLFormElement>)=>
+    const handleEdit=async(e:React.FormEvent<HTMLFormElement>)=>
     {
+        const ok = await confirm();
         e.preventDefault();
         updateWorkspace({
             id:workspaceId,
@@ -72,6 +87,8 @@ export const PreferencesModal=({
 
     }
     return(
+        <>
+           <ConfirmDialog/>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent>
                     <DialogHeader>
@@ -136,5 +153,6 @@ export const PreferencesModal=({
                     </div>
                 </DialogContent>
             </Dialog>
+        </>
     )
 }

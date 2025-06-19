@@ -23,10 +23,19 @@ export const create = mutation({
                 joinCode,
             });
 
+            // It inserts a document into a table (in this case, "workspaces").
+
+            // It automatically generates a unique document ID.  
+
             await ctx.db.insert("members",{
                 userId,
                 workspaceId,
                 role:"admin"
+            })
+
+            await ctx.db.insert("channels",{
+                name:"general",
+                workspaceId
             })
             
             return workspaceId;
