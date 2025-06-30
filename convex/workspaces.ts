@@ -249,4 +249,23 @@ export const remove = mutation({
 });
 
 
+export const getByJoinCode = query({
+  args: { code: v.string() },
+  handler: async (ctx, args) => {
+    const workspace = await ctx.db
+      .query("workspaces")
+      .filter(q => q.eq(q.field("joinCode"), args.code.toLowerCase()))
+      .first();
+
+    if (!workspace) return null;
+
+    return {
+      _id: workspace._id,
+      name: workspace.name,
+    };
+  },
+});
+
+
+
 // These all are api endpoints
