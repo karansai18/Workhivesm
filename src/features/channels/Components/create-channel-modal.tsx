@@ -11,7 +11,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useCreateChannel } from "../api/use-create-channel";
 import { useworkspaceId } from "@/hooks/use-workspace-id";
+import { useRouter } from "next/navigation";
 export const CreateChannelModal = ()=>{
+    const router= useRouter();
     const workspaceId = useworkspaceId();
     const {mutate,isPending}= useCreateChannel();
     const [open,setOpen] = useCreateChannelModal();
@@ -32,6 +34,7 @@ export const CreateChannelModal = ()=>{
             mutate({name,workspaceId},
                 {
                     onSuccess:(id)=>{
+                        router.push(`/workspace/${workspaceId}/channel/${id}`)
                         handleClose();
                     },
                 },
