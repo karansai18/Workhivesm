@@ -8,6 +8,7 @@ import { api } from "../../../../convex/_generated/api";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import VerificationInput from "react-verification-input";
@@ -21,6 +22,11 @@ const JoinPage = () => {
   const [enteredCode, setEnteredCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+ const isMember = useMemo(() => {
+  return data?.members?.some((member) => member.userId === joinCode) || false;
+}, [data, joinCode]);
+
+
 
   const handleJoin = async () => {
     setError(null);
@@ -33,7 +39,7 @@ const JoinPage = () => {
       router.push(`/workspace/${data._id}`);
     } catch (err: any) {
       setError(err.message || "Failed to join workspace");
-    } finally {
+    } finally { 
       setLoading(false);
     }
   };
