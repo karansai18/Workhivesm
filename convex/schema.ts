@@ -28,6 +28,8 @@ const schema = defineSchema({
     memberTwoId:v.id("members"),
   })
   .index("by_workspace_id",["workspaceId"]),
+
+
   messages:defineTable({
     body:v.string(),
     image:v.optional(v.id("_storage")),
@@ -43,12 +45,14 @@ const schema = defineSchema({
   .index("by_member_id",["memberId"])
   .index("by_channel_id",["channelId"])
   .index("by_conversation_id",["conversationId"])
+  .index("by_parent_messsage_id",["parentMessageId"])
   .index("by_channel_id_parent_messsage_id_conversation_id",["channelId","parentMessageId","conversationId"]),
-  reactions:defineTable({
-    workspaceId:v.id("workspaces"),
-    messageId:v.id("messages"),
-    memberId:v.id("members"),
-    value:v.string(),
-  })
+ reactions: defineTable({
+  workspaceId: v.id("workspaces"),
+  messageId: v.id("messages"),
+  memberId: v.id("members"),
+  value: v.string(),
+}).index("by_messageId", ["messageId"]),
+
 });
 export default schema;
