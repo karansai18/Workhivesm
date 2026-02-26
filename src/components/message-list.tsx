@@ -92,7 +92,8 @@ export const MessageList = ({
                 hideThreadButton={variant==="thread"}
                 threadCount={message.threadCount}
                 threadImage={message.threadImage}
-                threadTimeStamp={message.threadTimestamp}
+                threadName={message.threadName}
+                threadTimestamp={message.threadTimestamp}
 
 
 
