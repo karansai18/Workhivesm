@@ -234,13 +234,23 @@ export const remove = mutation({
             throw new Error("Unauthorized")
         }
         //we have to delete members associated with workspace
-        const [members] = await Promise.all([
-            ctx.db.query("members").withIndex("by_workspace_id",(q)=> q.eq("workspaceId",args.id)).collect()
+        const [members, channels, conversations, messages, reactions] = await Promise.all([
+            ctx.db.query("members").withIndex("by_workspace_id",(q)=> q.eq("workspaceId",args.id)).collect(),
+            ctx.db.query("channels").withIndex("by_workspace_id",(q)=> q.eq("workspaceId",args.id)).collect(),
+            ctx.db.query("conversations").withIndex("by_workspace_id",(q)=> q.eq("workspaceId",args.id)).collect(),
+            ctx.db.query("messages").withIndex("by_workspace_id",(q)=> q.eq("workspaceId",args.id)).collect(),
+            ctx.db.query("reactions").withIndex("by_workspace_id",(q)=> q.eq("workspaceId",args.id)).collect(),
         ]);
         for(const member of members )
-        {
             await ctx.db.delete(member._id)
-        }
+        for(const c of channels )
+            await ctx.db.delete(c._id)
+        for(const c of conversations )
+            await ctx.db.delete(c._id)
+        for(const m of messages )
+            await ctx.db.delete(m._id)
+        for(const r of reactions )
+            await ctx.db.delete(r._id)
         await ctx.db.delete(args.id);
         return args.id;
 
