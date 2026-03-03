@@ -1,7 +1,7 @@
 import { GetMessagesReturnType } from "../features/messages/api/use-get-messages";
 import { differenceInMinutes, format, isToday, isYesterday } from "date-fns";
 import { Loader } from "lucide-react";
-import { Id } from "../convex/_generated/dataModel";
+import { Id } from "../../convex/_generated/dataModel";
 // Dummy message component — replace with your actual one
 const TIME_THRESHOLD=5;
 import {Message}  from "./message";
