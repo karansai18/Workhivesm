@@ -35,7 +35,7 @@ export const InviteModal = ({ open, setOpen, name, joinCode }: InviteModalProps)
     const handleNewCode = async () => {
         const ok = await confirm();
         if (!ok) return;
-        mutate({ workspaceId }, {
+        mutate({ workspaceId: workspaceId! }, {
             onSuccess: () => {
                 toast.success("Invite code generated successfully!");
             },
