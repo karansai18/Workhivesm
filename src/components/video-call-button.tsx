@@ -19,7 +19,7 @@ interface VideoCallButtonProps {
 
 export const VideoCallButton = ({ channelId, conversationId, type }: VideoCallButtonProps) => {
     const workspaceId = useworkspaceId();
-    const { data: member, isLoading: isMemberLoading } = useCurrentMember({ workspaceId });
+    const { data: member, isLoading: isMemberLoading } = useCurrentMember({ workspaceId: workspaceId! });
     const requestCall = useMutation(api.calls.requestCall);
     const router = useRouter();
 
