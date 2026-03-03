@@ -9,8 +9,8 @@ import { ChatInput } from "./chat-input";
 
 const ChannelIdPage=()=>{
     const channelId = useChannelId();
-    const {results,status,loadMore}=useGetMessages({channelId});
-    const { data:channel,isLoading:channelLoading} =useGetChannel({id:channelId});
+    const {results,status,loadMore}=useGetMessages({channelId: channelId!});
+    const { data:channel,isLoading:channelLoading} =useGetChannel({id: channelId!});
     console.log({results});
     if(channelLoading || status==="LoadingFirstPage"){
         return(
