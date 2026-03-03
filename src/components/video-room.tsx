@@ -12,10 +12,17 @@ interface VideoRoomProps {
 }
 
 export const VideoRoom = ({ room, token, onDisconnected }: VideoRoomProps) => {
+    const livekitUrl =
+        process.env.NEXT_PUBLIC_LIVEKIT_URL ||
+        process.env.LIVEKIT_URL;
+    if (!livekitUrl) {
+        console.error("Missing NEXT_PUBLIC_LIVEKIT_URL");
+    }
+
     return (
         <LiveKitRoom
             data-lk-theme="default"
-            serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
+            serverUrl={livekitUrl}
             token={token}
             connect={true}
             video={true}
