@@ -49,8 +49,8 @@ export const PreferencesModal=({
             return;
         }
          removeWorkspace({
-            id:workspaceId
-         },{
+             id: workspaceId!
+          },{
             onSuccess:()=>{
                 
                 toast.success("Workspace Removed");
@@ -69,7 +69,7 @@ export const PreferencesModal=({
         const ok = await confirm();
         e.preventDefault();
         updateWorkspace({
-            id:workspaceId,
+            id: workspaceId!,
             name:value,
         },{
             onSuccess:()=>{
