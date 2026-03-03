@@ -34,6 +34,7 @@ export const Conversation=({id}:ConversationProps)=>{
     return(
         <div className="flex flex-col h-full">
             <Header
+                conversationId={id}
                 memberName={member?.user.name}
                 memberImage={member?.user.image}
                 onClick={()=> onOpenProfile(memberId) }
