@@ -71,8 +71,8 @@ export const Thread=({messageId,onClose}:ThreadProps)=>{
             setIsPending(true);
             editorRef?.current?.enable(false);
             const values:CreateMessageValues={
-                channelId,
-                workspaceId,
+                channelId: channelId!,
+                workspaceId: workspaceId!,
                 parentMessageId:messageId,
                 body,
                 image:undefined,
