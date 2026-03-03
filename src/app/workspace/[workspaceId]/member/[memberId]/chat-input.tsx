@@ -39,7 +39,7 @@ export const ChatInput = ({placeholder,conversationId}:ChatInputProps) => {
             editorRef?.current?.enable(false);
             const values:CreateMessageValues={
                 conversationId,
-                workspaceId,
+                workspaceId: workspaceId!,
                 body,
                 image:undefined,
             };

@@ -45,7 +45,7 @@ export const Thread=({messageId,onClose}:ThreadProps)=>{
     const [editorKey,setEditorKey] = useState(0); 
     const [pending,setIsPending]= useState(false);
     const editorRef=useRef<Quill|null>(null);
-    const {data:currentMember}=useCurrentMember({ workspaceId });
+    const {data:currentMember}=useCurrentMember({ workspaceId: workspaceId! });
     const { data:message , isLoading:loadingMessage } = useGetMessage({id:messageId});
 
     const {mutate:generateUploadUrl} = useGenerateUploadUrl();
@@ -71,8 +71,8 @@ export const Thread=({messageId,onClose}:ThreadProps)=>{
             setIsPending(true);
             editorRef?.current?.enable(false);
             const values:CreateMessageValues={
-                channelId,
-                workspaceId,
+                channelId: channelId!,
+                workspaceId: workspaceId!,
                 parentMessageId:messageId,
                 body,
                 image:undefined,

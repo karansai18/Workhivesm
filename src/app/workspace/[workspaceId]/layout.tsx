@@ -12,6 +12,7 @@ import { WorkspaceSidebar } from "./WorkspaceSidebar";
 import { usePanel } from "@/hooks/use-panel";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Loader } from "lucide-react";
+import { AdminCallApprovals } from "@/components/admin-call-approvals";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { Thread } from "@/features/messages/components/thread";
 import { Profile } from "@/features/members/components/profile";
@@ -49,7 +50,10 @@ const InnerLayout = ({ children }: WorkspaceIdLayoutProps) => {
             <WorkspaceSidebar />
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel minSize={20} defaultSize={80} >{children}</ResizablePanel>
+          <ResizablePanel minSize={20} defaultSize={80} >
+            <AdminCallApprovals />
+            {children}
+          </ResizablePanel>
           {showPanel && (
             <>
               <ResizableHandle withHandle />

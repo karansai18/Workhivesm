@@ -20,7 +20,7 @@ export const Reactions = ({
     onChange
 }:ReactionsProps)=>{
     const workspaceId=useworkspaceId();
-    const { data:currentMember } = useCurrentMember({workspaceId});
+    const { data:currentMember } = useCurrentMember({workspaceId: workspaceId!});
     const currentMemberId=currentMember?._id;
     if(data.length===0||!currentMemberId){
         return null;

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, ReactElement } from 'react';
 import {Button} from "@/components/ui/button";
 import {Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import { title } from 'process';
 export const useConfirm = (
     title: string,
     message: string,
-):[()=>JSX.Element,()=>Promise<unknown>]=>{
+):[()=>ReactElement,()=>Promise<unknown>]=>{
     const [promise, setPromise] = useState<{resolve:(value:boolean)=>void}|null>(null);
     const confirm=()=> new Promise<boolean>((resolve,reject)=>{
         setPromise({resolve});

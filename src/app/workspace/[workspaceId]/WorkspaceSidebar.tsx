@@ -18,10 +18,10 @@ export const WorkspaceSidebar=()=>{
     const channelId = useChannelId();
     const workspaceId = useworkspaceId();
     const [_open,setOpen]=useCreateChannelModal();
-    const {data:member,isLoading:memberLoading} = useCurrentMember({workspaceId});
-    const {data:workspace,isLoading:workspaceLoading} = useGetWorkspace({id:workspaceId});
-    const {data:channels,isLoading:channelLoading} = useGetChannels({workspaceId});
-    const {data:members,isLoading:membersLoading} = useGetMembers({workspaceId})
+    const {data:member,isLoading:memberLoading} = useCurrentMember({workspaceId: workspaceId!});
+    const {data:workspace,isLoading:workspaceLoading} = useGetWorkspace({id: workspaceId!});
+    const {data:channels,isLoading:channelLoading} = useGetChannels({workspaceId: workspaceId!});
+    const {data:members,isLoading:membersLoading} = useGetMembers({workspaceId: workspaceId!})
     //this members constains each memeber and his name etc..
 
     console.log("Fetched members:", members);

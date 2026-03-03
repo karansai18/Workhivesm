@@ -14,7 +14,7 @@ const MemberIdPage=()=>{
     const {mutate,isPending}= useCreateOrGetConversation();
     useEffect(()=>{
         mutate({
-            workspaceId,
+            workspaceId: workspaceId!,
             memberId,
         },{
             onSuccess(data){

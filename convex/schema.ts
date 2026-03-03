@@ -61,5 +61,24 @@ const schema = defineSchema({
     .index("by_workspace_id", ["workspaceId"])
     .index("by_message_id", ["messageId"])
     .index("by_member_id", ["memberId"]),
+
+  calls: defineTable({
+    workspaceId: v.id("workspaces"),
+    type: v.union(v.literal("channel"), v.literal("dm")),
+    status: v.union(
+      v.literal("pending"), // Waiting for admin approval (Channels only)
+      v.literal("active"),  // Call is ongoing
+      v.literal("ended")    // Call ended
+    ),
+    channelId: v.optional(v.id("channels")),
+    conversationId: v.optional(v.id("conversations")),
+    memberId: v.id("members"), // The person who initiated/requested the call
+    joinCode: v.string(), // Random ID used for LiveKit room name
+  })
+    .index("by_workspace_id", ["workspaceId"])
+    .index("by_channel_id", ["channelId"])
+    .index("by_conversation_id", ["conversationId"])
+    .index("by_workspace_status", ["workspaceId", "status"]),
 });
+
 export default schema;

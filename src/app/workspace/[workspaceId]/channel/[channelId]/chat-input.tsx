@@ -38,8 +38,8 @@ export const ChatInput = ({placeholder}:ChatInputProps) => {
             setIsPending(true);
             editorRef?.current?.enable(false);
             const values:CreateMessageValues={
-                channelId,
-                workspaceId,
+                channelId: channelId!,
+                workspaceId: workspaceId!,
                 body,
                 image:undefined,
             };

@@ -2,7 +2,7 @@ import {useMutation} from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useCallback, useMemo, useState } from "react";
 import { Doc,Id } from "../../../../convex/_generated/dataModel";
-type RequestType = {workspaceId:Id<"workspaces">,memberId?:Id<"members">,};
+type RequestType = {workspaceId:Id<"workspaces">,memberId:Id<"members">};
 type ResponseType = Id<"conversations">|null ;
 type Options={
     onSuccess?:(data:ResponseType)=>void;

@@ -32,11 +32,11 @@ export const CreateChannelModal = ()=>{
         };
         const handleSubmit = async(e:React.FormEvent<HTMLFormElement>)=>{
             e.preventDefault();
-            mutate({name,workspaceId},
+            mutate({name,workspaceId: workspaceId!},
                 {
                     onSuccess:(id)=>{
                         toast.success("Channel Created Successfully");
-                        router.push(`/workspace/${workspaceId}/channel/${id}`)
+                        router.push(`/workspace/${workspaceId!}/channel/${id}`)
                         handleClose();
                     },
                     onError:(error)=>{
