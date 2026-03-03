@@ -77,14 +77,14 @@ import { useGetChannels } from "@/features/channels/api/use-get-channel";
 import { useCreateChannelModal } from "@/features/channels/store/use-create-channel-modal";
 import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useworkspaceId } from "@/hooks/use-workspace-id";
 import { Loader, TriangleAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useEffect } from "react";
 
 const WorkspaceIdPage = () => {
     const router = useRouter();
-    const workspaceId = useWorkspaceId();
+    const workspaceId = useworkspaceId();
 
     // ✅ Always call hooks
     const [open, setOpen] = useCreateChannelModal();
