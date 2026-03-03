@@ -31,13 +31,13 @@ export const VideoCallButton = ({ channelId, conversationId, type }: VideoCallBu
         setIsPending(true);
         try {
             const callId = await requestCall({
-                workspaceId,
+                workspaceId: workspaceId!,
                 type,
                 channelId,
                 conversationId,
             });
             // Let the caller navigate immediately. A modal will pop if it's pending.
-            router.push(`/workspace/${workspaceId}/call/${callId}`);
+            router.push(`/workspace/${workspaceId!}/call/${callId}`);
         } catch (error) {
             toast.error("Failed to process call request");
             console.error(error);
