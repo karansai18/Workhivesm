@@ -29,8 +29,10 @@ const JoinPage = () => {
 
 
   const handleJoin = async () => {
+    if (!data) return;
     setError(null);
     setLoading(true);
+
     try {
       await joinMutation({
         joinCode: enteredCode,
