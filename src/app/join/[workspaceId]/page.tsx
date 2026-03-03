@@ -22,9 +22,9 @@ const JoinPage = () => {
   const [enteredCode, setEnteredCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
- const isMember = useMemo(() => {
-  return data?.members?.some((member) => member.userId === joinCode) || false;
-}, [data, joinCode]);
+  //  const isMember = useMemo(() => {
+  //   return data?.members?.some((member) => member.userId === joinCode) || false;
+  // }, [data, joinCode]);
 
 
 
@@ -39,7 +39,7 @@ const JoinPage = () => {
       router.push(`/workspace/${data._id}`);
     } catch (err: any) {
       setError(err.message || "Failed to join workspace");
-    } finally { 
+    } finally {
       setLoading(false);
     }
   };
