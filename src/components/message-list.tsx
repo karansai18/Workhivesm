@@ -1,6 +1,7 @@
 import { GetMessagesReturnType } from "../features/messages/api/use-get-messages";
 import { differenceInMinutes, format, isToday, isYesterday } from "date-fns";
 import { Loader } from "lucide-react";
+import { Id } from "../convex/_generated/dataModel";
 // Dummy message component — replace with your actual one
 const TIME_THRESHOLD=5;
 import {Message}  from "./message";
@@ -42,7 +43,7 @@ export const MessageList = ({
 }: MessageListProps) => {
   const [editingId,setEditingId] =useState<Id<"messages">|null>(null);
   const workspaceId=useworkspaceId();
-  const {data:currentMember}= useCurrentMember({workspaceId});
+  const {data:currentMember}= useCurrentMember({workspaceId: workspaceId!});
 
   const groupedMessages = data?.reduce((groups, message) => {
     const date = new Date(message._creationTime); 
