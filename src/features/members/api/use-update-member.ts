@@ -3,7 +3,7 @@ import { api } from "../../../../convex/_generated/api";
 import { useCallback, useMemo, useState } from "react";
 import { Doc, Id } from "../../../../convex/_generated/dataModel";
 type RequestType = {
-  id?: Id<"members">,
+  id: Id<"members">,
   role:"admin" | "member"
 };
 type ResponseType = Id<"members"> | null;
