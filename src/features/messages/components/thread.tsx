@@ -45,7 +45,7 @@ export const Thread=({messageId,onClose}:ThreadProps)=>{
     const [editorKey,setEditorKey] = useState(0); 
     const [pending,setIsPending]= useState(false);
     const editorRef=useRef<Quill|null>(null);
-    const {data:currentMember}=useCurrentMember({ workspaceId });
+    const {data:currentMember}=useCurrentMember({ workspaceId: workspaceId! });
     const { data:message , isLoading:loadingMessage } = useGetMessage({id:messageId});
 
     const {mutate:generateUploadUrl} = useGenerateUploadUrl();
