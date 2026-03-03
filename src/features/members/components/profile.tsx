@@ -49,7 +49,7 @@ export const Profile = ({ memberId, onClose }: ProfileProps) => {
   });
   const { data: currentMember, isLoading: isLoadingCurrentMember } =
     useCurrentMember({
-      workspaceId,
+      workspaceId: workspaceId!,
     });
   const { mutate: updateMember, isPending: isUpdatingMember } =
     useUpdateMember();
