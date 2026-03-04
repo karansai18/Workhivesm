@@ -192,6 +192,9 @@ export const Thread=({messageId,onClose}:ThreadProps)=>{
                                 threadImage={message.threadImage}
                                 threadName= {message.threadName}
                                 threadTimestamp={message.threadTimestamp}
+                                callId={message.callId}
+                                workspaceId={workspaceId}
+                                callStatus={(message as { callStatus?: string }).callStatus}
                 
                 
                 
@@ -240,6 +243,9 @@ export const Thread=({messageId,onClose}:ThreadProps)=>{
                     reactions={message.reactions}
                     isEditing={editingId===message._id}
                     setEditingId={setEditingId}
+                    callId={message.callId}
+                    workspaceId={workspaceId}
+                    callStatus={(message as { callStatus?: string }).callStatus}
                 />
             </div>
             <div>

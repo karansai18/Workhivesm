@@ -41,6 +41,9 @@ interface MessageProps {
   threadImage?: string;
   threadName?: string;
   threadTimestamp?: number;
+  callId?: Id<"calls">;
+  workspaceId?: Id<"workspaces">;
+  callStatus?: string;
 }
 const formatFullTime = (date: Date) => {
   return `${isToday(date) ? "Today" : isYesterday(date) ? "Yesterday" : format(date, "MMM d, yyyy")} at ${format(date, "HH:mm:ss a")}`;
@@ -64,6 +67,9 @@ export const Message = ({
   threadImage,
   threadName,
   threadTimestamp,
+  callId,
+  workspaceId,
+  callStatus,
 }: MessageProps) => {
   const { parentMessageId, onOpenMessage, onOpenProfile, onClose } = usePanel();
   const [ConfirmDialog, confirm] = useConfirm(
@@ -141,19 +147,25 @@ export const Message = ({
                 {format(new Date(createdAt), "hh:mm")}
               </button>
             </Hint>
-            {isEditing ? (
-              <div className="w-full h-full">
-                <Editor
-                  onSubmit={handleUpdate}
-                  disabled={isPending}
-                  defaultValue={JSON.parse(body)}
-                  onCancel={() => setEditingId(null)}
-                  variant="update"
-                />
-              </div>
-            ) : (
+          {isEditing ? (
+            <div className="w-full h-full">
+              <Editor
+                onSubmit={handleUpdate}
+                disabled={isPending}
+                defaultValue={(function() {
+                  try {
+                    return JSON.parse(body);
+                  } catch {
+                    return body;
+                  }
+                })()}
+                onCancel={() => setEditingId(null)}
+                variant="update"
+              />
+            </div>
+          ) : (
               <div className="flex flex-col w-full">
-                <Renderer value={body} />
+                <Renderer value={body} callId={callId} workspaceId={workspaceId} callStatus={callStatus} />
                 <Thumbnail url={image} />
                 {!updatedAt ? (
                   <span className="text-xs text-muted-foreground">
@@ -216,7 +228,13 @@ export const Message = ({
               <Editor
                 onSubmit={handleUpdate}
                 disabled={isPending}
-                defaultValue={JSON.parse(body)}
+                defaultValue={(function() {
+                  try {
+                    return JSON.parse(body);
+                  } catch {
+                    return body;
+                  }
+                })()}
                 onCancel={() => setEditingId(null)}
                 variant="update"
               />
@@ -237,7 +255,7 @@ export const Message = ({
                   </button>
                 </Hint>
               </div>
-              <Renderer value={body} />
+              <Renderer value={body} callId={callId} workspaceId={workspaceId} callStatus={callStatus} />
               <Thumbnail url={image} />
               {!updatedAt ? (
                 <span className="text-xs text-muted-foreground">(edited)</span>

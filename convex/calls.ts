@@ -60,6 +60,35 @@ export const requestCall = mutation({
             joinCode,
         });
 
+        // Get user name for the message
+        const user = await ctx.db.get(userId);
+        const userName = user?.name || "Someone";
+
+        // Create a message in the channel/conversation about the call
+        if (args.type === "channel" && args.channelId) {
+            await ctx.db.insert("messages", {
+                body: JSON.stringify({ type: "call", callId, joinCode, userName }),
+                memberId: member._id,
+                workspaceId: args.workspaceId,
+                channelId: args.channelId,
+                conversationId: undefined,
+                parentMessageId: undefined,
+                callId: callId,
+                updatedAt: Date.now(),
+            });
+        } else if (args.type === "dm" && args.conversationId) {
+            await ctx.db.insert("messages", {
+                body: JSON.stringify({ type: "call", callId, joinCode, userName }),
+                memberId: member._id,
+                workspaceId: args.workspaceId,
+                channelId: undefined,
+                conversationId: args.conversationId,
+                parentMessageId: undefined,
+                callId: callId,
+                updatedAt: Date.now(),
+            });
+        }
+
         return callId;
     },
 });

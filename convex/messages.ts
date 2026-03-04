@@ -261,6 +261,12 @@ export const get = query({
               ({ memberId, ...rest }) => rest,
             );
 
+            let callStatus: string | undefined;
+            if (message.callId) {
+              const call = await ctx.db.get(message.callId);
+              callStatus = call?.status;
+            }
+
             return {
               ...message,
               image,
@@ -271,6 +277,7 @@ export const get = query({
               threadImage: thread.image,
               threadName: thread.name,
               threadTimestamp: thread.timestamp,
+              callStatus,
             };
           }),
         )
