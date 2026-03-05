@@ -95,7 +95,9 @@ export const MessageList = ({
                 threadImage={message.threadImage}
                 threadName={message.threadName}
                 threadTimestamp={message.threadTimestamp}
-
+                callId={message.callId}
+                workspaceId={workspaceId}
+                callStatus={message.callStatus}
 
 
                 />

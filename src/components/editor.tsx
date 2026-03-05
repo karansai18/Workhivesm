@@ -149,7 +149,11 @@ const Editor=({ onSubmit,onCancel,placeholder="Write Something.....",defaultValu
         if(innerRef){
             innerRef.current=quill;
         }
-        quill.setContents(defaultValueRef.current);
+        try {
+            quill.setContents(defaultValueRef.current as Parameters<typeof quill.setContents>[0]);
+        } catch (e) {
+            quill.setText(String(defaultValueRef.current || ""));
+        }
         setText(quill.getText());
 
         quill.on(Quill.events.TEXT_CHANGE,()=>{
